@@ -1,9 +1,6 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
-		</view>
+		<button type="default" @click="ajax">点击</button>
 	</view>
 </template>
 
@@ -18,7 +15,14 @@
 
 		},
 		methods: {
-
+		ajax(){
+			uni.request({
+				url: "http://www.liulongbin.top:3005/api/getlunbo",
+				success(res){
+					console.log(res)
+				}
+			})
+		}
 		}
 	}
 </script>
