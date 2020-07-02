@@ -12,12 +12,12 @@
 			}
 		},
 		onLoad() {
-
+			this.ajax()
 		},
 		methods: {
 		ajax(){
 			uni.request({
-				url: "http://www.liulongbin.top:3005/api/getlunbo",
+				url: "http://127.0.0.1:8082/product?pno=1",
 				success(res){
 					console.log(res)
 				}
