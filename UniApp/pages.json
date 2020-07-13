@@ -20,6 +20,9 @@
 		},
 		{
 			"path":"pages/search/search"
+		},
+		{
+			"path":"pages/find-dateils/find-dateils"
 		}
 	],
 	"globalStyle": {
