@@ -1,0 +1,200 @@
+@import './variables';
+*{
+    box-sizing: border-box;
+    outline: none;
+}
+html{
+    font-size: 13px;
+}
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2em;
+    background-color: #f0f0f0;
+    // 苹果手机才看的出效果，把字体设置细一点
+    -webkit-font-smoothing:autialiased;
+	
+}
+a{
+    color: #999;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+// text-overflow
+.text-ellipse{
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 圆角
+.border-r{
+	border-radius: 0.5rem;
+}
+
+// text bg
+@each $colorKey,$color in $colors {
+    .text-#{$colorKey} {
+        color:$color;
+    }
+    .bg-#{$colorKey} {
+        background-color : $color;
+    }
+}
+// text left center right
+@each $var in (left,center,right) {
+    .text-#{$var} {
+        text-align: $var !important;
+    }
+}
+
+@each $sizeKey,$size in $font-size {
+    .fs-#{$sizeKey} {
+        font-size: $size * $base-font-size;
+    }
+}
+
+// flex
+.d-flex {
+    display: flex;
+}
+.flex-column{
+    flex-direction: column;
+}
+@each $key,$value in $flex-jc {
+    .jc-#{$key} {
+        justify-content: $value;
+    }
+}
+
+@each $keys,$value in $flex-ai {
+    .ai-#{$keys} {
+        align-items: $value;
+    }
+}
+
+.flex-1{
+    flex:1;
+}
+.flex-grow-1{
+    flex-grow: 1;
+}
+
+
+// m-0,mx-0
+@each $typekey,$type in $spacing-types {
+    // .m-1
+    @each $sizekey,$size in $spacing-sizes {
+        //mt-1{}
+        .#{$typekey}-#{$sizekey} {
+            #{$type}:$size * $spacing-base-size;
+        }
+    }
+    // mx-1  my-1
+    @each $sizekey,$size in $spacing-sizes {
+        //mt-1{}
+        .#{$typekey}x-#{$sizekey} {
+            #{$type}-left:$size * $spacing-base-size;
+            #{$type}-right:$size * $spacing-base-size;
+        }
+    }
+    @each $sizekey,$size in $spacing-sizes {
+        //mt-1{}
+        .#{$typekey}y-#{$sizekey} {
+            #{$type}-top:$size * $spacing-base-size;
+            #{$type}-bottom:$size * $spacing-base-size;
+        }
+    }
+    // .mt-1
+    @each $directionkey,$direction in $spacing-directions {
+        @each $sizekey,$size in $spacing-sizes {
+            //mt-1{}
+            .#{$typekey}#{$directionkey}-#{$sizekey} {
+                #{$type}-#{$direction}:$size * $spacing-base-size;
+            }
+        }
+    }
+    .#{$typekey} {
+        #{$type}:0;
+    }
+}
+
+// 加粗
+.font-b{
+	font-weight: bold;
+}
+
+// button
+.btn{
+    border:none;
+    border-radius: 0.1538rem;
+    font-size: map-get($font-size,'sm' ) * $base-font-size;
+    padding: 0.2rem 0.6rem;
+    &.btn-lg{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        i{
+            color:map-get($colors, 'primary' );
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        background: map-get($colors, 'white-1' );
+        border:1px solid map-get($colors, 'white-2' );
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+    }
+}
+
+
+// width  height
+.w-100 {
+    width: 100%;
+}
+.h-100 {
+    height: 100%;
+}
+
+
+// border边框
+
+@each $dir in (top,right,bottom,left) {
+    .border-#{$dir} {
+        border-#{$dir}:1px solid $border-color;
+    }
+}
+
+// search样式
+.search{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: map-get($colors, 'search-bg-color' );
+	image{width: 1.3rem;height: 1.3rem;border-radius: 50px;margin: 0.5rem;}
+	width: 100%;
+	height: 2.8rem;
+	.search-top{
+		background-color: map-get($colors, "white" );
+		font-size: 13px;
+		width: 75%;
+	}
+	.search-top-a{
+		border-radius: 50px;
+		width: 90%;
+		height: 70%;
+		display: flex;
+		align-items: center;
+		justify-content: left;
+		background: map-get($colors , 'white' );
+	}
+}
+
+//相对定位
+.p-r{
+	position: relative;
+}
