@@ -1,6 +1,6 @@
 <template>
 	<view class="p-3 text-left" style="padding-top:0rem;">
-		<h4>热销好物</h4>
+		<h4 v-if="shows">热销好物</h4>
 		<view class="d-flex rexiao flex-wrap ai-center jc-center">
 			<router-link to="/" tag="div" class="mt-2 pb-1 bg-white border-r">
 				<image src="../../static/home-img/rxhw1.png" class="border-r" mode=""></image>
@@ -66,7 +66,7 @@
 	export default{
 		// 接收父传过来的数据
 		props:{
-			
+			shows:{type:Number}
 		},
 		data() {
 			return {

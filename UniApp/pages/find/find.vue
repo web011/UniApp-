@@ -1,5 +1,5 @@
 <template>
-	<view class="find-container p-2 pt-0 d-flex">
+	<view class="find-container p-2 pt-0 d-flex mt-2">
 		<router-link to="/pages/find-dateils/find-dateils" tag="div" class="find-text bg-white mr-2">
 			<image src="../../static/home-img/card-img-text1.png" mode=""></image>
 			<p class="ml-2 text-ellipse fs-md" style="width: 89%;">钱花的值了,超级好看</p>

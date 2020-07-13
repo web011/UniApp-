@@ -142,7 +142,7 @@
 			</view>
 		</view>
 		<!-- 热销好物 -->
-		<dateils></dateils>
+		<dateils :shows="shows"></dateils>
 		<!-- 右下角的活动推荐 -->
 		<router-link to="/" tag="div" style="position: fixed;bottom: 5rem;right: 0rem;">
 			<image src="../../static/home-img/icon-tj.png" mode="" style="width: 3.5rem;height: 3.5rem;"></image>
@@ -158,7 +158,7 @@
 		},
 		data() {
 			return {
-
+				shows:1
 			}
 		},
 		onLoad() {
