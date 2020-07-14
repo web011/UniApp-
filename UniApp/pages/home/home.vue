@@ -9,7 +9,7 @@
 		</view>
 		<!-- 轮播图 -->
 		<view class="swiper-container">
-			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="200" circular="true">
+			<swiper :indicar-dots="true" :autoplay="true" :interval="3000" :duration="200" circular="true">
 				<swiper-item>
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img5.jpg);"></view>
@@ -50,23 +50,23 @@
 		</view>
 		<!-- 商品详情 -->
 		<view class="p-3 d-flex ai-center jc-between">
-			<router-link to="/" tag="div" class="top-details text-center" style="position: relative;">
-				<image src="../../static/home-img/top-details1-1.png" mode="" style="width: 1.5rem;height: 0.7rem;position: absolute;top: -0.1rem;left: 1.9rem; z-index: 999;"></image>
+			<view class="p-details text-center" style="position: relative;">
+				<image src="../../static/home-img/top-details1-1.png" mode="" style="width: 1.5rem;height: 0.7rem;position: absolute;p: -0.1rem;left: 1.9rem; z-index: 999;"></image>
 				<image src="../../static/home-img/top-details1.png" mode=""></image>
 				<view class="fs-xs">鲜货上架</view>
-			</router-link>
-			<router-link to="/" tag="div" class="top-details text-center">
+			</view>
+			<view class="p-details text-center">
 				<image src="../../static/home-img/top-details2.png" mode=""></image>
 				<view class="fs-xs">服饰专区</view>
-			</router-link>
-			<router-link to="/" tag="div" class="top-details text-center">
+			</view>
+			<view class="p-details text-center">
 				<image src="../../static/home-img/top-details3.png" mode=""></image>
 				<view class="fs-xs">毛绒玩偶</view>
-			</router-link>
-			<router-link to="/" tag="div" class="top-details text-center">
+			</view>
+			<view class="p-details text-center">
 				<image src="../../static/home-img/top-details4.png" mode=""></image>
 				<view class="fs-xs">生活用品</view>
-			</router-link>
+			</view>
 		</view>
 		<!-- 商品图片 -->
 		<view class="details-imgs p-3 d-flex ai-center jc-between">
@@ -78,21 +78,21 @@
 		<view class="d-flex jc-center ai-center mb-3" style="position: relative;">
 			<image src="../../static/home-img/card-img.png" mode="">
 				<view class="card-img-text d-flex ai-center jc-center mt-3">
-					<router-link to="/" tag="div">
+					<view>
 						<image src="../../static/home-img/card-img-text1.png" mode=""></image>
 						<p class="text-ellipse fs-xs ml-2" style="width: 3.9rem;">李白Q版手办</p>
 						<p class="text-jg-color fs-md ml-1 font-b">￥258</p>
-					</router-link>
-					<router-link to="/" tag="div">
+					</view>
+					<view>
 						<image src="../../static/home-img/card-img-text2.png" mode=""></image>
 						<p class="text-ellipse fs-xs ml-2" style="width: 3.9rem;">李白印花T恤</p>
 						<p class="text-jg-color fs-md ml-1 font-b">￥138</p>
-					</router-link>
-					<router-link to="/" tag="div">
+					</view>
+					<view>
 						<image src="../../static/home-img/card-img-text3.png" mode=""></image>
 						<p class="text-ellipse fs-xs ml-2" style="width: 3.9rem;">王者荣耀不二生活 青莲剑仙-李白拼图</p>
 						<p class="text-jg-color fs-md ml-1 font-b">￥39</p>
-					</router-link>
+					</view>
 				</view>
 			</image>
 		</view>
@@ -120,52 +120,52 @@
 		<!-- 王者大牌商品详情 -->
 		<view class="p-3">
 			<h4>王者大牌</h4>
-			<view class="wzdp mt-2">
-				<router-link to="/">
+			<view class="wzdp mt-2 d-flex flex-wrap">
+				<view>
 					<image src="../../static/home-img/wzdp1.png" mode=""></image>
-				</router-link>
-				<router-link to="/">
+				</view>
+				<view>
 					<image src="../../static/home-img/wzdp2.png" mode=""></image>
-				</router-link>
-				<router-link to="/">
+				</view>
+				<view>
 					<image src="../../static/home-img/wzdp3.png" mode=""></image>
-				</router-link>
-				<router-link to="/">
+				</view>
+				<view>
 					<image src="../../static/home-img/wzdp4.png" mode=""></image>
-				</router-link>
-				<router-link to="/">
+				</view>
+				<view>
 					<image src="../../static/home-img/wzdp5.png" mode=""></image>
-				</router-link>
-				<router-link to="/">
+				</view>
+				<view>
 					<image src="../../static/home-img/wzdp6.png" mode=""></image>
-				</router-link>
+				</view>
 			</view>
 		</view>
 		<!-- 热销好物 -->
 		<dateils :shows="shows"></dateils>
 		<!-- 右下角的活动推荐 -->
-		<router-link to="/" tag="div" style="position: fixed;bottom: 5rem;right: 0rem;">
+		<router-link to="/" tag="div" style="position: fixed;botm: 5rem;right: 0rem;">
 			<image src="../../static/home-img/icon-tj.png" mode="" style="width: 3.5rem;height: 3.5rem;"></image>
 		</router-link>
 	</view>
 </template>
 
 <script>
-	import dateils from '../../component/dateils-list/dateils-list.vue'
+	import dateils from '../../component/dateils-list/dateils-list.vue';
 	export default {
 		components:{
 			dateils
 		},
 		data() {
 			return {
-				shows:1
+				shows:"热销好物",
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-		
+			
 		}
 	}
 </script>
@@ -178,7 +178,7 @@
 			width: 100%;
 			height: 8rem;
 		}
-		.top-details{
+		.p-details{
 			image{
 				width: 2.7rem;
 				height: 2.7rem;
@@ -186,7 +186,7 @@
 			}
 		}
 		.details-imgs{
-			padding-top: 0rem !important;
+			padding-p: 0rem !important;
 			image{
 				width: 49%;
 				height: 9rem;
@@ -205,7 +205,7 @@
 				width: 4.5rem;
 				height: 4.5rem;
 				margin-right: 0.8rem;
-				// margin-bottom: 0.4rem;
+				// margin-botm: 0.4rem;
 			}
 		}
 		.wzdp{

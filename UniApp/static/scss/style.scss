@@ -16,7 +16,8 @@ body{
 	
 }
 a{
-    color: #999;
+    text-decoration: none;
+	color: #666;
 }
 
 .flex-wrap{
@@ -207,4 +208,10 @@ a{
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
+}
+
+// ul标签
+ul{
+	list-style-type: none;
+	display: flex;
 }

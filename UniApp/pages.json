@@ -23,6 +23,9 @@
 		},
 		{
 			"path":"pages/find-dateils/find-dateils"
+		},
+		{
+			"path":"pages/dateils/dataeils"
 		}
 	],
 	"globalStyle": {

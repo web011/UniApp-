@@ -1,11 +1,29 @@
 <template>
 	<view class="cate">
+		<!-- search -->
 		<view class="search" style="background-color: hsla(0,0%,89%,.8);">
 			<router-link to="" tag="div" class="search-top-a">
 				<image src="../../static/home-img/search.png"></image>
 				<input type="text" value="" class="search-top" placeholder="试试输入你想要的宝贝名称吧~"/>
 			</router-link>
 		</view>
+		<!-- nav -->
+		<!-- <view>
+		    <scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
+		        <view id="demo1" class="scroll-view-item_H uni-bg-red">A</view>
+		        <view id="demo2" class="scroll-view-item_H uni-bg-green">B</view>
+		        <view id="demo3" class="scroll-view-item_H uni-bg-blue">C</view>
+		    </scroll-view>
+		</view> -->
+		<!-- price-nav -->
+		<ul type="none" class="d-flex fs-md ai-center jc-center p-0">
+			<li v-for="(item,i) in searchtext" :key="i" :class="{'text-jg-color':active==i}" @click="active = i">{{item}}</li>
+			<li :class="{'text-jg-color':active==4}" @click="jiage">
+				<text v-if="active==4">价格从高到底</text>
+				<text v-else-if="active==5" :class="{'text-jg-color':active==5}">价格从底到高</text>
+				<text v-else-if="active!==4">价格</text>
+			</li>
+		</ul>
 		<dateils></dateils>
 	</view>
 </template>
@@ -18,17 +36,35 @@
 		},
 		data() {
 			return {
-				
+				searchtext:["默认","最热销","新上架"],
+				active:0
 			}
 		},
 		onLoad() {
 	
 		},
 		methods: {
-		
+			jiage(){
+				if(this.active!==4){
+					this.active = 4;
+				}else{
+					this.active = 5;
+				}
+			}
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
+	.cate{
+		ul{
+			border: 1px solid #ddd;
+			li{
+				text-align: center;
+				width: 4.5rem;
+				height: 1.5rem;
+				line-height: 1.5rem;
+			}
+		}
+	}
 </style>
