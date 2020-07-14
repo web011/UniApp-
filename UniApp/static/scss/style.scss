@@ -214,4 +214,73 @@ a{
 ul{
 	list-style-type: none;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sprite {
+    background:url(../imgs.png) no-repeat 0 0;
+    background-size:  221px 216px;
+    display: inline-block;
+    &.sprite-dfk {
+        width: 22px;
+        height: 20px;
+        background-position: 17.839% 72.449%;
+    },
+	&.sprite-dfh{
+		width: 23px;
+		height: 20px;
+		background-position:69.114% 72.194%;
+	},
+	&.sprite-dsh{
+		width: 21px;
+		height: 20px;
+		background-position:0.752% 72.449%;
+	},
+	&.sprite-dpj{
+		width: 18px;
+		height: 20px;
+		background-position:35.222% 72.449%;
+	}
+	&.sprite-gwc{
+		width: 17px;
+		height: 17px;
+		background-position:98.28% 30.982%;
+	}
+	&.sprite-sc{
+		width: 17px;
+		height: 17px;
+		background-position:98.28% 59.194%;
+	}
+	&.sprite-pj{
+		width: 17px;
+		height: 17px;
+		background-position:98.28% 45.088%;
+	}
+	&.sprite-dz{
+		width: 17px;
+		height: 17px;
+		background-position:83.784% 71.285%;
+	}
+	&.sprite-xt{
+		width: 16px;
+		height: 16px;
+		background-position:15.892% 86.466%;
+	}
+	&.sprite-bz{
+		width: 16px;
+		height: 16px;
+		background-position:81.907% 86.466%;
+	}
+	&.sprite-wm{
+		width: 16px;
+		height: 16px;
+		background-position:95.11% 86.466%;
+	}
+}
+.sprites {
+	background: url(../index.png) no-repeat 0 100%;
+	background-size: 86px 45px;
+	width: 17px;
+	height: 17px;
 }

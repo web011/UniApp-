@@ -13,11 +13,32 @@
       "unicode_decimal": 58906
     },
     {
+      "icon_id": "584249",
+      "name": "右箭头",
+      "font_class": "iconfontjiantou3",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "625944",
+      "name": "15-圆圈未选 - 副本",
+      "font_class": "yuanquanweixuanfuben",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
       "icon_id": "765354",
       "name": "购物车",
       "font_class": "shouye",
       "unicode": "e61b",
       "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "774432",
+      "name": "垃圾",
+      "font_class": "laji",
+      "unicode": "e650",
+      "unicode_decimal": 58960
     },
     {
       "icon_id": "1315189",
@@ -46,6 +67,13 @@
       "font_class": "shoucang1",
       "unicode": "e681",
       "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "6946958",
+      "name": "笔记",
+      "font_class": "biji",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
     },
     {
       "icon_id": "7388051",

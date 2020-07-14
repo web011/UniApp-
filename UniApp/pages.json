@@ -1,31 +1,51 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		//首页 
 		{
 			"path": "pages/home/home"
 			// "style": {
 			// 	"navigationBarTitleText": "周边商城"
 			// }
 		},
+		// 分类
 		{
 			"path":"pages/cate/cate"
 		},
+		// 发现
 		{
 			"path":"pages/find/find"
 		},
+		// 购物车
 		{
 			"path":"pages/cart/cart"
 		},
+		// 我的
 		{
 			"path":"pages/mine/mine"
 		},
+		// 搜索
 		{
 			"path":"pages/search/search"
 		},
+		// 发现详情
 		{
 			"path":"pages/find-dateils/find-dateils"
 		},
+		// 商品详情
 		{
 			"path":"pages/dateils/dataeils"
+		},
+		// 收藏
+		{
+			"path":"pages/collection/collection"
+		},
+		// 个人资料
+		{
+			"path":"pages/personal/personal"
+		},
+		// 订单
+		{
+			"path":"pages/order/order"
 		}
 	],
 	"globalStyle": {
