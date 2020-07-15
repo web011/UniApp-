@@ -8,13 +8,10 @@
 			</router-link>
 		</view>
 		<!-- nav -->
-		<!-- <view>
-		    <scroll-view class="scroll-view_H" scroll-x="true" @scroll="scroll" scroll-left="120">
-		        <view id="demo1" class="scroll-view-item_H uni-bg-red">A</view>
-		        <view id="demo2" class="scroll-view-item_H uni-bg-green">B</view>
-		        <view id="demo3" class="scroll-view-item_H uni-bg-blue">C</view>
-		    </scroll-view>
-		</view> -->
+		<scroll-view class="scroll-view_H" scroll-x="true">
+			<!-- 内容 -->
+			<view id="demo1" class="scroll-view-item_H" v-for="(item,i) in fenlei" :key="i" :class="{'text-jg-color':fenleis==i}" @click="fenleis = i">{{item}}</view>
+		</scroll-view>
 		<!-- price-nav -->
 		<ul type="none" class="d-flex fs-md ai-center jc-center p-0">
 			<li v-for="(item,i) in searchtext" :key="i" :class="{'text-jg-color':active==i}" @click="active = i">{{item}}</li>
@@ -37,7 +34,12 @@
 		data() {
 			return {
 				searchtext:["默认","最热销","新上架"],
-				active:0
+				active:0,
+				old: {
+					scrollTop: 0
+				},
+				fenlei:["全部","手办模玩","数码3C","服饰","毛绒玩偶","生活用品","智能机器人","金银饰品","数据线","食品","图书"],
+				fenleis:0
 			}
 		},
 		onLoad() {
@@ -50,7 +52,18 @@
 				}else{
 					this.active = 5;
 				}
-			}
+			},
+			goTop: function(e) {
+				// 解决view层不同步的问题
+				this.scrollTop = this.old.scrollTopd
+				this.$nextTick(function() {
+					this.scrollTop = 0
+				});
+				uni.showToast({
+					icon:"none",
+					title:"纵向滚动 scrollTop 值已被修改为 0"
+				})
+			},
 		}
 	}
 </script>
@@ -65,6 +78,18 @@
 				height: 1.5rem;
 				line-height: 1.5rem;
 			}
+		}
+		.scroll-view_H {
+			white-space: nowrap;
+			width: 100%;
+		}
+		.scroll-view-item_H {
+			display: inline-block;
+			width: 4rem;
+			height: 2.5rem;
+			line-height: 2.5rem;
+			text-align: center;
+			font-size: 0.7em;
 		}
 	}
 </style>

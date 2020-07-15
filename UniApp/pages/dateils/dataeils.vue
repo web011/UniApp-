@@ -28,7 +28,8 @@
 				<text class="text-jg-color fs-xss ml-3 mt-2 pb-2 font-b">￥258.00</text>
 			</view>
 			<!-- 商品款式 -->
-			<view class="ks bg-white d-flex jc-between p-2 pl-3 pr-3" @click="s">
+			<!-- 点击选择款式就显示加入购物车或者立即购买的样式 -->
+			<view class="ks bg-white d-flex jc-between p-2 pl-3 pr-3" @click="show = true;qd = false;">
 				<text class="fs-sm">请选择:款式</text>
 				<text class="fs-lg">&gt;</text>
 			</view>
@@ -77,6 +78,7 @@
 			</view>
 			<!-- 点击选择款式就显示，不点击就隐藏 -->
 			<view v-show="show">
+				<view class="topshows" @click="show = false"></view>
 				<view class="showks bg-white p-3">
 					<!-- 商品图片和标题和价格 -->
 					<view class="d-flex">
@@ -99,15 +101,19 @@
 						<text class="count fs-lg">{{count}}</text>
 						<text class="text-font-hui fs-xss mt-1 couns" @click="scount(1)">+</text>
 					</view>
-					<!-- 加入购物车和立即购买 -->
+					<!-- 点击选择款式显示这个 -->
 					<view class="w-100 carts">
 						<text class="text-white bg-jg-cs fs-lg">加入购物车</text>
 						<text class="text-white bg-jg-color fs-lg">立即购买</text>
 					</view>
+					<view class="w-100 carts">
+						<!-- 点击立刻购买和加入购物车显示这个 -->
+						<text class="text-white bg-jg-color fs-lg" style="width: 100%;" v-show="qd">确定</text>
+					</view>
 				</view>
 			</view>
 			<!-- 添加购物车和立即购买 -->
-			<view class="w-100 cart-bottom bg-white d-flex jc-center ai-center pt-1">
+			<view class="w-100 cart-bottom bg-white d-flex jc-center ai-center pt-1" v-show="show==false">
 				<router-link to="/" style="width: 15%; height: 100%;" class="d-flex flex-column ai-center jc-center">
 					<i class="iconfont icon-1"></i>
 					<text class="fs-xs">首页</text>
@@ -125,8 +131,9 @@
 					<text class="fs-xs">收藏</text>
 				</view>
 				<view class="cart-bottoms">
-					<text class="text-white bg-jg-cs fs-lg" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;">加入购物车</text>
-					<text class="text-white bg-jg-color fs-lg mr-1" style="border-top-right-radius: 50px;border-bottom-right-radius: 50px;">立即购买</text>
+					<!-- 点击下面立即购买和加入购物车就显示确定样式 -->
+					<text class="text-white bg-jg-cs fs-lg" style="border-top-left-radius: 50px;border-bottom-left-radius: 50px;" @click="qd = true;show = true;">加入购物车</text>
+					<text class="text-white bg-jg-color fs-lg mr-1" style="border-top-right-radius: 50px;border-bottom-right-radius: 50px;" @click="qd = true;show = true;">立即购买</text>
 				</view>
 			</view>
 		</view>
@@ -177,7 +184,8 @@
 				show:false,
 				// 未收藏false，收藏true
 				collection:false,
-				pl:true
+				pl:true,
+				qd:true
 			}
 		},
 		onLoad(option) {
@@ -186,10 +194,6 @@
 		methods: {
 			scount(n){
 				this.count += n;
-			},
-			// 点击隐藏选择款式样式
-			s(){
-				this.show = true;
 			},
 			// 收藏
 			collections(){},
@@ -209,7 +213,7 @@
 		// background-color: #fff;
 		// 头部导航栏
 		.dateils-top{
-			z-index: 1000;
+			z-index: 999;
 			background-color: rgba(0,0,0,0.1);
 			width: 100%;
 			height: 3rem;
@@ -263,12 +267,20 @@
 			}
 		}
 		// 点击显示，不点隐藏
+		.topshows{
+			position: fixed;
+			top: 0;
+			width: 100%;
+			height: 50rem;
+			background:rgba(0,0,0,0.5);
+		}
 		.showks{
 			position: fixed;
 			left: 0rem;
 			bottom: 0rem;
 			width: 100%;
 			height: 20rem;
+			margin-bottom: -0rem;	
 			image{
 				width: 3rem;
 				height: 3rem;
@@ -301,6 +313,7 @@
 				position: fixed;
 				bottom: 0rem;
 				left: 0rem;
+				z-index: 999;
 				text{
 					width: 50%;
 					display: inline-block;
