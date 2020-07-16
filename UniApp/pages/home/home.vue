@@ -9,7 +9,7 @@
 		</view>
 		<!-- 轮播图 -->
 		<view class="swiper-container">
-			<swiper :indicar-dots="true" :autoplay="true" :interval="3000" :duration="200" circular="true">
+			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="200" circular="true">
 				<swiper-item>
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img5.jpg);"></view>

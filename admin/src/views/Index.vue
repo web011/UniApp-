@@ -1,72 +1,62 @@
 <template>
   <div class="container">
-    <div class="container-left" @mouseover="bgbutton">
-      <div class="container-left-top">
-        <!-- <img src="" alt=""> -->
-        <h3>**商城后台</h3>
+    <div style="width:20rem;hiehgt:100%">
+      <div class="w-100 d-flex ai-center jc-center" style="height:5rem;border-bottom:1px solid #ddd">
+        <h2>周边商城后台</h2>
       </div>
-      <div class="container-left-top-user">
-        <div class="img"></div>
-        <div>
-          <span style="font-size:13px;color:#ddd;">欢迎回来,</span>
-          <p style="color:#fff;font-size:15px;margin-top:5px;">超级管理员</p>
+      <div class="w-100 d-flex jc-center ai-center" style="height:6.5rem;border-bottom:1px solid #ddd">
+        <img src="../assets/mes.jpg" alt="" width="50" height="50" class="border-r">
+        <div class="ml-2">
+          <p class="text-font-hui fs-sm mb-2">欢迎回来</p>
+          <span class="fs-xl font-b">超级管理员</span>
         </div>
       </div>
-      <div class="shoye">
-        <img src="../assets/sy.png" alt="" width="20px">
-        <span class="contexts">后台首页</span>
+      <div class="d-flex ai-center w-100 jc-center" style="height:4rem;border-bottom:1px solid #ddd;">
+        <i class="iconfont icon-1" style="font-size:1.8rem"></i>
+        <span class="ml-2 font-b fs-lg">后台首页</span>
       </div>
-      <div style="padding-left:10px;">
-        <span class="text">数据管理</span>
+      <div class="d-flex p-3 jc-left ai-enter flex-column">
+        <span class="mb-3">数据管理</span>
+        <div>
+          <van-collapse v-model="activeName" accordion>
+            <van-collapse-item title="首页轮播图" name="1">
+              <div class="d-flex flex-column jc-center ai-center">
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==0}" @click="swiper">添加轮播图</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==1}" @click="swiperlist">轮播图列表</p>
+              </div>
+            </van-collapse-item>
+          </van-collapse>
+          <van-collapse v-model="activeName" accordion>
+            <van-collapse-item title="首页推荐热销商品" name="2">
+              <div class="d-flex flex-column jc-center ai-center">
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==3}" @click="active = 3">添加商品</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==4}" @click="active = 4">商品列表</p>
+              </div>
+            </van-collapse-item>
+          </van-collapse>
+          <van-collapse v-model="activeName" accordion>
+            <van-collapse-item title="商品分类列表" name="3">
+              <div class="d-flex flex-column jc-center ai-center">
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==5}" @click="active = 5;$router.push('/children/Categories')">添加分类</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==6}" @click="active = 6;$router.push('/children/Categorieslist')">分类列表</p>
+              </div>
+            </van-collapse-item>
+          </van-collapse>
+          <van-collapse v-model="activeName" accordion>
+            <van-collapse-item title="分类列表" name="4">
+              <div class="d-flex flex-column jc-center ai-center">
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==7}" @click="active = 7;$router.push('/children/Cate')">添加分类</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==8}" @click="active = 8;$router.push('/children/Catelist')">分类列表</p>
+              </div>
+            </van-collapse-item>
+          </van-collapse>
+        </div>
       </div>
-      <van-collapse v-model="activeName" accordion>
-        <van-collapse-item title="商品管理" name="1" size="large">
-          <div class="collapse-text">
-            <button @click="list">商品列表</button>
-            <button>多条件搜索</button>
-            <button>添加商品</button>
-          </div>
-        </van-collapse-item>
-        <div style="padding-left:10px;">
-      </div>
-        <van-collapse-item title="用户管理" name="2">
-          <div class="collapse-text">
-            <button>用户列表</button>
-            <button>用户检索</button>
-          </div>
-        </van-collapse-item>
-      <div style="padding-left:10px;">
-      </div>
-        <van-collapse-item title="订单管理" name="3">
-          <div class="collapse-text">
-            <button>订单列表</button>
-            <button>搜索订单</button>
-          </div>
-        </van-collapse-item>
-      </van-collapse> 
-      <span class="text" style="margin:40px 0 10px 10px;">内容管理</span>
-      <van-collapse v-model="activeNames" accordion>
-        <van-collapse-item title="首页商品管理" name="1">
-          <div class="collapse-text">
-            <button>轮播广告</button>
-            <button>首页推荐</button>
-            <button>最新上架</button>
-            <button>热销单品</button>
-          </div>
-        </van-collapse-item>
-        <van-collapse-item title="功能页面" name="2">
-          <div class="collapse-text">
-            <button>403错误页面</button>
-            <button>404错误页面</button>
-            <button>500错误页面</button>
-          </div>
-        </van-collapse-item>
-      </van-collapse>
     </div>
     <div class="container-right">
       <div class="container-right-top">
       </div>
-      <div class="container-right-center">
+      <div class="container-right-center p-3">
         <router-view></router-view>
       </div>
     </div>
@@ -86,137 +76,51 @@ export default {
     return {
       activeName: '0',
       activeNames: '0',
-      titles:"111"
+      active:-1
     };
   },
   methods:{
-    list(){
-      this.$router.push("/children/list")
+    swiper(){
+      this.active = 0;
+      this.$router.push("/children/swiper")
     },
-    bgbutton(event){
-      
-    }
+    swiperlist(){
+      this.active = 1;
+      this.$router.push("/children/swiperlist")
+    },
   }
 }
 </script>
-<style>
+<style lang="scss">
 .container{
   width: 100%;
   height: 100vh;
   display: flex;
-  background-color: #f5f5f5;
-}
-/* 左边样式 */
-.container-left{
-  display: flex;
-  flex-direction: column;
-  width: 15%;
-  height: 100%;
-  background-color: #2A3F54;
-}
-.container-left>.container-left-top{
-  display: flex;
-  width: 100%;
-  height: 50px;
-  align-items: center;
-  justify-content: center;
-}
-.container-left>.container-left-top>h3{
-  color: #fff;
-  font-size: 17px;
-}
-.shoye{
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
-}
-.contexts{
-  color: #fff;
-  font-size: 14px;
-  margin: 20px 0 20px 10px;
-  display: inline-block;
-}
-.text{
-  color:#fff;
-  font-size:12px;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-/* 修改vant里面的样式 */
-[class*=van-hairline]::after{
-  border: none;
-}
-.van-collapse-item--border::after{
-  border-top: none;
-}
-.van-collapse-item__content{
-  padding: 0;
-}
-.van-cell--large .van-cell__title{
-  font-size: 14px;
-}
-.van-cell--clickable{
-  text-align: left;
-  padding-left: 30px;
-  background-color: #2A3F54;
-  color: #fff;
-  font-size: 14px !important;
-}
-.van-cell::after{
-  border: none;
-}
-/*  */
-
-.container-left .collapse-text{
-  display: flex !important;
-  flex-direction: column !important;
-  width: 100%;
-  background-color: #235a91;
-}
-.container-left .collapse-text>button{
-  padding: 10px 0 10px 0;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  font-size: 13px;
-  color:rgba(255, 255, 255, 0.75);
-  width: 100%;
-  background-color: #235a91;
-}
-.container-left>.container-left-top-user{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 70px;
-  margin-bottom: 15px;
-  margin-top: 5px;
-}
-.container-left>.container-left-top-user>.img{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: royalblue;
-  margin-right: 20px;
-}
-/* 右边样式 */
-.container-right{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.container-right>.container-right-top{
-  width: 100%;
-  height: 100px;
-  background-color: red;
-}
-.container-right>.container-right-center{
-  width: 100%;
-  height: 100%;
-  background-color: royalblue;
+  background-color: #fff;
+  .van-collapse-item__content{
+    padding: 0px;
+  }
+  // 选中样式
+  .active{
+    background-color:#d88e8e;
+    color: #fff;
+  }
+  /* 右边样式 */
+  .container-right{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .container-right-top{
+      width: 100%;
+      height: 100px;
+      background-color: blue;
+    }
+    .container-right-center{
+      width: 100%;
+      height: 100%;
+      background-color: #f5f5f5;
+      }
+  }
 }
 </style>

@@ -1,0 +1,62 @@
+
+// colors
+$colors:(
+    'font-hui':#565656,
+	'white':#fff,
+	'search-bg-color':#cd4848,
+	'jg-color':#f04831,
+	'font-hei':#323232,
+	'jg-cs':#dc8d33,
+);
+$border-color :map-get($colors, 'light-1' );
+// font-size
+$base-font-size:13px;
+$font-size:(
+    xxs:0.6154,
+    xs:0.7692,//10px
+    sm:0.9231,//12px
+    md:1,//13px
+    lg :1.0769,//14px
+    xl:1.2308,//16px
+);
+
+
+
+$flex-jc:(
+    start:flex-start,
+    end:flex-end,
+    center:center,
+    between:space-between,
+    around:space-around,
+);
+
+$flex-ai:(
+    start:flex-start,
+    end:flex-end,
+    center:center,
+    stretch:stretch,
+);
+
+
+// spacicg
+// .mt-1 => margin top
+$spacing-types:(
+    m:margin,
+    p:padding,
+);
+$spacing-directions:(
+    t:top,
+    r:right,
+    b:bottom,
+    l:left,
+);
+$spacing-base-size:1rem;
+$spacing-sizes:(
+    0:0,
+    1:0.25,
+    2:0.5,
+    3:1,
+    4:1.5,
+    5:3,
+);
+
