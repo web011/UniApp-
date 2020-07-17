@@ -1,31 +1,47 @@
-const Swiper = require('../../models/Swiper')
-
 module.exports = app =>{
     const express = require('express')
-    const router = express.Router()
-    const Swiper = require('../../models/Swiper');
-    const Categories = require('../../models/Categories');
-    router.post('/Categories',async (req,res)=>{
-        const model =  await Categories.create(req.body);
+    const router = express.Router({
+        mergeParams: true
+    })
+
+    router.post('/',async (req,res)=>{
+        const model =  await req.model.create(req.body);
         res.send(model)
     })
-    router.get('/Categories',async (req,res)=>{
-        const items = await Categories.find().populate('parent');
+    router.get('/',async (req,res)=>{
+        let queryOptions = {}
+        if(req.model.modelName === 'Categories') {
+            queryOptions.populate = 'parent'
+        }
+        const items = await req.model.find().setOptions(queryOptions);
         res.send(items)
     })
-    router.get('/Categories/:id',async (req,res)=>{
-        const model = await Categories.findById(req.params.id);
+    router.get('/:id',async (req,res)=>{
+        const model = await req.model.findById(req.params.id);
         res.send(model)
     })
-    router.put('/Categories/:id',async (req,res)=>{
-        const model = await Categories.findByIdAndUpdate(req.params.id,req.body)
+    router.put('/:id',async (req,res)=>{
+        const model = await req.model.findByIdAndUpdate(req.params.id,req.body)
         res.send(model)
     })
-    router.delete('/Categories/:id',async (req,res)=>{
-        await Categories.findByIdAndDelete(req.params.id,req.body)
+    router.delete('/:id',async (req,res)=>{
+        await req.model.findByIdAndDelete(req.params.id,req.body)
         res.send({
             success:true   
         })
     })
-    app.use('/admin',router)
+    app.use('/admin/rest/:resource',async (req,res,next)=>{
+        // console.log()
+        // const modelName = require('inflection').classify(req.params.resource);
+        req.model = require(`../../models/${req.params.resource}`)
+        next()
+    },router)
+
+    const multer = require('multer')
+    const upload = multer({dest: __dirname + '/../../uploads'})
+    app.post('/admin/upload', upload.single('file') ,async (req,res)=>{
+        const file = req.file;
+        file.url = `http://localhost:3000/uploads/${file.filename}`
+        res.send(file)
+    })
 }

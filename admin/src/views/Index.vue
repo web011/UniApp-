@@ -27,18 +27,18 @@
             </van-collapse-item>
           </van-collapse>
           <van-collapse v-model="activeName" accordion>
-            <van-collapse-item title="首页推荐热销商品" name="2">
+            <van-collapse-item title="首页热销商品" name="2">
               <div class="d-flex flex-column jc-center ai-center">
-                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==3}" @click="active = 3">添加商品</p>
-                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==4}" @click="active = 4">商品列表</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==3}" @click="active = 3;$router.push('/children/HomeDateils')">添加商品</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==4}" @click="active = 4;$router.push('/children/HomeDateilsList')">商品列表</p>
               </div>
             </van-collapse-item>
           </van-collapse>
           <van-collapse v-model="activeName" accordion>
             <van-collapse-item title="商品分类列表" name="3">
               <div class="d-flex flex-column jc-center ai-center">
-                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==5}" @click="active = 5;$router.push('/children/Categories')">添加分类</p>
-                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==6}" @click="active = 6;$router.push('/children/Categorieslist')">分类列表</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==5}" @click="active = 5;$router.push('/children/Categories')">添加商品分类</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==6}" @click="active = 6;$router.push('/children/Categorieslist')">商品分类列表</p>
               </div>
             </van-collapse-item>
           </van-collapse>
@@ -47,6 +47,14 @@
               <div class="d-flex flex-column jc-center ai-center">
                 <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==7}" @click="active = 7;$router.push('/children/Cate')">添加分类</p>
                 <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==8}" @click="active = 8;$router.push('/children/Catelist')">分类列表</p>
+              </div>
+            </van-collapse-item>
+          </van-collapse>
+          <van-collapse v-model="activeName" accordion>
+            <van-collapse-item title="添加分类商品" name="5">
+              <div class="d-flex flex-column jc-center ai-center">
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==9}" @click="active = 9;$router.push('/children/CateDateils')">添加商品</p>
+                <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==10}" @click="active = 10;$router.push('/children/CateDateilsList')">商品列表</p>
               </div>
             </van-collapse-item>
           </van-collapse>

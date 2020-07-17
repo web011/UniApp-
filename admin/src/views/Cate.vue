@@ -31,7 +31,7 @@ export default {
         async save(){
             let res
             if(this.id){
-                res = await this.$http.put(`Categories/${this.id}`,this.model);
+                res = await this.$http.put(`rest/Categories/${this.id}`,this.model);
                 this.$router.push('/children/Catelist')
             }else{
                 if(this.model.name === undefined){
@@ -40,7 +40,7 @@ export default {
                         message:'数据不能为空'
                     })
                 }else{
-                    res= await this.$http.post('Categories',this.model);
+                    res= await this.$http.post('rest/Categories',this.model);
                     this.$router.push('/children/Catelist')
                     this.$message({
                         type:'success',
@@ -50,11 +50,11 @@ export default {
             }
         },
         async fetch(){
-            const res = await this.$http.get(`Categories/${this.id}`);
+            const res = await this.$http.get(`rest/Categories/${this.id}`);
             this.model = res.data;
         },
         async fetchparents(){
-            const res = await this.$http.get(`Categories`);
+            const res = await this.$http.get(`rest/Categories`);
             this.parents = res.data;
         }
     },
