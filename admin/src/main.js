@@ -15,6 +15,9 @@ Vue.config.productionTip = false;
 import http from './http'
 Vue.prototype.$http = http;
 
+// 挂载img图片地址
+Vue.prototype.$httpimg = "http://localhost:3000/uploads/";
+
 // 引入字体图标
 import './assets/iconfont/iconfont.css'
 

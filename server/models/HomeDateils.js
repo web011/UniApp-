@@ -6,9 +6,9 @@ const schema = new mongoose.Schema({
     price:{type:String},
     // 一下四个目前没有数据
     // 商品里面的轮播图
-    commodityswiper:{type:String},
+    commodityswiper:{},
     // 商品详情
-    dateils:{type:String},
+    dateils:{},
     // 用户评论
     usercomment:{type:String},
     // 用户评论图片

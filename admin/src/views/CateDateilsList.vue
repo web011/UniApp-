@@ -3,7 +3,7 @@
         <h1 class="mb-5 mt-5 ml-4">商品分类列表</h1>
         <el-table :data="items">
             <el-table-column prop="_id" label="ID"></el-table-column>
-            <el-table-column prop="name" label="分类名称"></el-table-column>
+            <el-table-column prop="name" label="商品分类"></el-table-column>
             <el-table-column fixed="right" label="操作" width="180">
                 <template slot-scope="scope">
                     <el-button type="text" size="small" @click="$router.push(`/children/CateDateils/${scope.row._id}`)">修改</el-button>

@@ -14,30 +14,52 @@
                     </el-form-item>
                 </el-tab-pane>
                 <el-tab-pane label="商品" name="skills">
-                    <el-button @click="model.skills.push({})"> <i class="el-icon-plus"></i> 添加商品</el-button>
+                    <el-button @click="addObj"> <i class="el-icon-plus"></i> 添加商品</el-button>
                     <el-row type="flex" style="flex-wrap:wrap">
-                        <el-col :md="12" v-for="(item,i) in model.skills" :key="i">
+                        <el-col :lg="24" v-for="(item,i) of model.skills" :key="i">
+                            <el-form-item label展示图片>
+                                    <el-upload
+                                    class="avatar-uploader"
+                                    :action="$http.defaults.baseURL + 'upload'"
+                                    :show-file-list="false"
+                                    :on-success="res => $set(item,`showimg`,res.url)"
+                                    >
+                                        <img v-if="item.showimg" :src="item.showimg" class="avatar" alt="" style="width:7rem;height:7rem;">
+                                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                    </el-upload>
+                                </el-form-item>
                             <el-form-item label="商品标题" class="mt-4">
                                 <el-input v-model="item.title"></el-input>
                             </el-form-item>
                             <el-form-item label="商品价格" class="mt-4">
                                 <el-input v-model="item.price"></el-input>
                             </el-form-item>
-                            <el-form-item label="测试1" class="mt-4">
-                                <el-input v-model="model.scores.img1"></el-input>
-                            </el-form-item>
-                            <el-form-item label="商品图片">
-                                <el-upload
-                                class="avatar-uploader"
-                                :action="$http.defaults.baseURL + 'upload'"
-                                :show-file-list="false"
-                                :on-success="res => $set(item,'icon',res.url)"
-                                >
-                                    <img v-if="item.icon" :src="item.icon" class="avatar" alt="">
-                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                                </el-upload>
-                            </el-form-item>
-                                
+                            <div class="d-flex jc-center ai-center">
+                                <el-form-item v-for="i in 5" :key="i" :label="'商品轮播图 ('+i+')'" style="margin-left:2rem">
+                                    <el-upload
+                                    class="avatar-uploader"
+                                    :action="$http.defaults.baseURL + 'upload'"
+                                    :show-file-list="false"
+                                    :on-success="res => $set(item.dateilsswiper,`img${i}`,res.url)"
+                                    >
+                                        <img v-if="item.dateilsswiper" :src="item.dateilsswiper['img'+i]" class="avatar" alt="" style="width:7rem;height:7rem;">
+                                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                    </el-upload>
+                                </el-form-item>
+                            </div>
+                            <div class="d-flex flex-wrap jc-left ai-centernpm run " style="border-bottom:1px solid #ddd;margin-left:3rem;margin-bottom:4rem">
+                                <el-form-item v-for="i in 12" :key="i" :label="'商品详情图片 ('+i+')'" style="margin-left:2rem">
+                                    <el-upload
+                                    class="avatar-uploader"
+                                    :action="$http.defaults.baseURL + 'upload'"
+                                    :show-file-list="false"
+                                    :on-success="res => $set(item.dateilsicon,`img${i}`,res.url)"
+                                    >
+                                        <img v-if="item.dateilsicon" :src="item.dateilsicon['img'+i]" class="avatar" alt="" style="width:7rem;height:7rem;">
+                                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                    </el-upload>
+                                </el-form-item>
+                            </div>
                         </el-col>
                     </el-row>
                 </el-tab-pane>
@@ -57,19 +79,21 @@ export default {
         return {
             model:{
                 name:'',
-                scores:{},
-                skills:[]
+                skills:[],
             },
-            dateilsname:[]
+            dateilsname:[],
         }
     },
     methods:{
+        addObj(){
+            var obj = {dateilsswiper:{},dateilsicon:{}};
+            this.model.skills.unshift(obj)
+        },
         async save(){
             let res
             if(this.id){
                 res = await this.$http.put(`rest/CateDateils/${this.id}`,this.model);
                 this.$router.push('/children/CateDateilslist')
-                console.log(this.model)
             }else{
                 if(this.model.name === undefined){
                     this.$message({
@@ -83,7 +107,6 @@ export default {
                         type:'success',
                         message:'保存成功'
                     })
-                    console.log(this.model)
                 }
             }
         },

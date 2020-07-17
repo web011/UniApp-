@@ -5,7 +5,9 @@ const schema = new mongoose.Schema({
     dateilsname:[{type:mongoose.SchemaTypes.ObjectId,ref:'Categories'}],
     scores:{},
     skills:[{
-        icon:{type:String},
+        dateilsswiper:{},
+        dateilsicon:{},
+        showimg:{type:String},
         title:{type:String},
         price:{type:String},
     }]
