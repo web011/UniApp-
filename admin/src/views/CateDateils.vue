@@ -34,8 +34,9 @@
                             <el-form-item label="商品价格" class="mt-4">
                                 <el-input v-model="item.price"></el-input>
                             </el-form-item>
-                            <div class="d-flex jc-center ai-center">
-                                <el-form-item v-for="i in 5" :key="i" :label="'商品轮播图 ('+i+')'" style="margin-left:2rem">
+                            <el-button @click="item.dateilsswipercount+=1"> <i class="el-icon-plus"></i> 添加商品轮播图</el-button>
+                            <div class="d-flex " style="margin-top:3rem">
+                                <el-form-item v-for="i in item.dateilsswipercount" :key="i" :label="'商品轮播图 ('+i+')'" style="margin-left:2rem">
                                     <el-upload
                                     class="avatar-uploader"
                                     :action="$http.defaults.baseURL + 'upload'"
@@ -47,8 +48,9 @@
                                     </el-upload>
                                 </el-form-item>
                             </div>
-                            <div class="d-flex flex-wrap jc-left ai-centernpm run " style="border-bottom:1px solid #ddd;margin-left:3rem;margin-bottom:4rem">
-                                <el-form-item v-for="i in 12" :key="i" :label="'商品详情图片 ('+i+')'" style="margin-left:2rem">
+                            <el-button @click="item.dateilsiconcount+=1"> <i class="el-icon-plus"></i> 添加商品详情图片</el-button>
+                            <div class="d-flex flex-wrap " style="border-bottom:1px solid #ddd;margin-bottom:4rem;margin-top:3rem">
+                                <el-form-item v-for="i in item.dateilsiconcount" :key="i" :label="'商品详情图片 ('+i+')'" style="margin-left:2rem">
                                     <el-upload
                                     class="avatar-uploader"
                                     :action="$http.defaults.baseURL + 'upload'"
@@ -86,7 +88,7 @@ export default {
     },
     methods:{
         addObj(){
-            var obj = {dateilsswiper:{},dateilsicon:{}};
+            var obj = {dateilsswiper:{},dateilsicon:{},dateilsswipercount:1,dateilsiconcount:1};
             this.model.skills.unshift(obj)
         },
         async save(){
@@ -94,6 +96,7 @@ export default {
             if(this.id){
                 res = await this.$http.put(`rest/CateDateils/${this.id}`,this.model);
                 this.$router.push('/children/CateDateilslist')
+                console.log(this.model)
             }else{
                 if(this.model.name === undefined){
                     this.$message({
@@ -117,9 +120,14 @@ export default {
         async fetchdateilsname(){
             const res = await this.$http.get(`rest/Categories`);
             this.dateilsname = res.data;
-        }
+        },
+        // async s(){
+        //     const res = await this.$http.get(`rest/CateDateils`);
+        //     console.log(res.data)
+        // } 
     },
     created(){
+        // this.s();
         this.fetchdateilsname();
         this.id && this.fetch();
     }

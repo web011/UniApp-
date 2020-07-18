@@ -7,6 +7,8 @@ const schema = new mongoose.Schema({
     // 一下四个目前没有数据
     // 商品里面的轮播图
     commodityswiper:{},
+    commoditycount:{type:Number},
+    dateilscount:{type:Number},
     // 商品详情
     dateils:{},
     // 用户评论

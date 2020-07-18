@@ -6,6 +6,8 @@ const schema = new mongoose.Schema({
     scores:{},
     skills:[{
         dateilsswiper:{},
+        dateilsswipercount:{type:Number},
+        dateilsiconcount:{type:Number},
         dateilsicon:{},
         showimg:{type:String},
         title:{type:String},

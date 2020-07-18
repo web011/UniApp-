@@ -21,8 +21,9 @@
                             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                         </el-upload>
                     </el-form-item>
+                    <el-button @click="model.commoditycount+=1"> <i class="el-icon-plus"></i> 添加商品轮播图</el-button>
                     <div class="d-flex" style="margin-top:3rem">
-                        <el-form-item v-for="i in 5" :key="i" :label="'商品轮播图 ('+i+')'" style="margin-left:2rem">
+                        <el-form-item v-for="i in model.commoditycount" :key="i" :label="'商品轮播图 ('+i+')'" style="margin-left:2rem">
                             <el-upload
                             class="avatar-uploader"
                             :action="$http.defaults.baseURL + 'upload'"
@@ -34,8 +35,9 @@
                             </el-upload>
                         </el-form-item>
                     </div>
+                    <el-button @click="model.dateilscount+=1"> <i class="el-icon-plus"></i> 添加商品详情图片</el-button>
                     <div class="d-flex flex-wrap jc-left ai-center" style="border-bottom:1px solid #ddd;margin-bottom:4rem;margin-top:3rem">
-                        <el-form-item v-for="i in 12" :key="i" :label="'商品详情图片('+i+')'" style="margin-left:2rem">
+                        <el-form-item v-for="i in model.dateilscount" :key="i" :label="'商品详情图片('+i+')'" style="margin-left:2rem">
                             <el-upload
                             class="avatar-uploader"
                             :action="$http.defaults.baseURL + 'upload'"
@@ -64,7 +66,9 @@ export default {
         return {
             model:{
                 commodityswiper:{},
-                dateils:{}
+                dateils:{},
+                commoditycount:1,
+                dateilscount:1
             },
         }
     },
