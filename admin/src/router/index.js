@@ -11,11 +11,20 @@ import HomeDateils from '../views/HomeDateils'
 import HomeDateilsList from '../views/HomeDateilsList'
 import CateDateils from '../views/CateDateils'
 import CateDateilsList from '../views/CateDateilsList'
+import AdminUser from '../views/AdminUser'
+import AdminUserList from '../views/AdminUserList'
+import Login from '../views/Login'
 
 
 Vue.use(VueRouter)
 
   const routes = [
+  {
+    path:'/login',
+    name:'login',
+    component:Login,
+    meta:{isPublic:true}
+  },
   {
     path: '/',
     name: 'Index',
@@ -43,12 +52,21 @@ Vue.use(VueRouter)
       {path:'/children/CateDateils/:id',component:CateDateils,props:true},
       {path:'/children/CateDateils',component:CateDateils},
       {path:'/children/CateDateilsList',component:CateDateilsList},
-    ]
+
+
+      {path:'/children/AdminUser/:id',component:AdminUser,props:true},
+      {path:'/children/AdminUser',component:AdminUser},
+      {path:'/children/AdminUserList',component:AdminUserList},
+    ],
   },
 ]
-
 const router = new VueRouter({
   routes
 })
-
+router.beforeEach((to,from,next) =>{
+  if(!to.meta.isPublic && !localStorage.token){
+    return next('/login')
+  }
+  next();
+})
 export default router
