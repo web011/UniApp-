@@ -4,7 +4,6 @@ module.exports = options => {
     const assert = require('http-assert')
     return async (req,res,next) => {
         const token = String(req.headers.authorization || '').split(' ').pop();
-        console.log(token)
         assert(token,401,'请先登陆')
         // assert(token,401,'请先提供jwt token')
         const {id} = jwt.verify(token,req.app.get('secret'))

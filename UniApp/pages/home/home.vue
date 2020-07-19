@@ -13,14 +13,14 @@
 				<swiper-item>
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img5.jpg);"></view>
-						<image src="../../static/home-img/swiper-img1.jpg" mode=""></image>
+						<image :src="swipers[0].url" mode=""></image>
 						<view class="p-a-right" style="background: url(../../static/home-img/swiper-img5.jpg);"></view>	
 					</view>
 				</swiper-item>
 				<swiper-item>
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img1.jpg);"></view>
-						<image src="../../static/home-img/swiper-img2.png" mode=""></image>
+						<image :src="swipers[1].url" mode=""></image>
 						<view class="p-a-right" style="background: url(../../static/home-img/swiper-img3.jpg);"></view>	
 					</view>
 				</swiper-item>
@@ -28,21 +28,21 @@
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<!-- 第五张图片来替换第二张图片 -->
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img5.jpg);"></view>
-						<image src="../../static/home-img/swiper-img3.jpg" mode=""></image>
+						<image :src="swipers[2].url" mode=""></image>
 						<view class="p-a-right" style="background: url(../../static/home-img/swiper-img4.png);"></view>	
 					</view>
 				</swiper-item>
 				<swiper-item>
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img3.jpg);"></view>
-						<image src="../../static/home-img/swiper-img4.png" mode=""></image>
+						<image :src="swipers[3].url" mode=""></image>
 						<view class="p-a-right" style="background: url(../../static/home-img/swiper-img5.jpg);"></view>	
 					</view>
 				</swiper-item>
 				<swiper-item>
 					<view class="swiper-item d-flex jc-center ai-center p-r">
 						<view class="p-a-left" style="background: url(../../static/home-img/swiper-img4.png);"></view>
-						<image src="../../static/home-img/swiper-img5.jpg" mode=""></image>
+						<image :src="swipers[4].url" mode=""></image>
 						<view class="p-a-right" style="background: url(../../static/home-img/swiper-img1.jpg);"></view>	
 					</view>
 				</swiper-item>
@@ -142,7 +142,7 @@
 			</view>
 		</view>
 		<!-- 热销好物 -->
-		<dateils :shows="shows"></dateils>
+		<dateils :shows="shows" :dateils="dateils"></dateils>
 		<!-- 右下角的活动推荐 -->
 		<router-link to="/" tag="div" style="position: fixed;bottom :5rem;right: 0rem;">
 			<image src="../../static/home-img/icon-tj.png" mode="" style="width: 3.5rem;height: 3.5rem;"></image>
@@ -159,13 +159,28 @@
 		data() {
 			return {
 				shows:"热销好物",
+				// 获取轮播图
+				swipers:[{},{},{},{},{}],
+				// 获取热销好物
+				dateils:{},
+				
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-			
+			async fetchswiper(){
+				const res = await this.$http.get('swiper');
+				this.swipers = res.data;
+				const res1 = await this.$http.get('homedateils');
+				this.dateils = res1.data;
+				console.log(this.dateils)
+			}
+		},
+		created() {
+			this.fetchswiper();
+			console.log(this.swipers)
 		}
 	}
 </script>

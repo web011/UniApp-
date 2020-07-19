@@ -75,7 +75,7 @@
         <span class="usertext">管理员： {{user}}</span>
       </div>
       <div class="container-right-center p-3">
-        <router-view></router-view>
+        <router-view :key="$route.path"></router-view>
       </div>
     </div>
   </div>

@@ -16,7 +16,7 @@
 		<view v-show="pl==true">
 			<!-- 商品轮播 -->
 			<swiper :indicator-dots="true" :autoplay="true" circular="true" :interval="3000" :duration="1000">
-				<swiper-item v-for="(item,i) in imgs" :key="i">
+				<swiper-item v-for="(item,i) of dateils.commodityswiper" :key="i">
 					<view class="swiper-item w-100 h-100">
 						<image :src="item" mode=""></image>
 					</view>
@@ -24,8 +24,8 @@
 			</swiper>
 			<!-- 商品名称和价格 -->
 			<view class="mb-2 bg-white d-flex flex-column">
-				<p class="text-ellipse fs-xss ml-3 mt-3 w-100">千年之狐李白Q版手办</p>
-				<text class="text-jg-color fs-xss ml-3 mt-2 pb-2 font-b">￥258.00</text>
+				<p class="text-ellipse fs-xss ml-3 mt-3 w-100">{{dateils.title}}</p>
+				<text class="text-jg-color fs-xss ml-3 mt-2 pb-2 font-b">{{dateils.price}}</text>
 			</view>
 			<!-- 商品款式 -->
 			<!-- 点击选择款式就显示加入购物车或者立即购买的样式 -->
@@ -66,15 +66,7 @@
 			</view>
 			<!-- 商品详情 -->
 			<view id="s1" class="mb-4">
-				<image src="../../static/dateils-img/libai-user-img.jpg" mode="" style="width: 100%;height: 20rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img1.jpg" mode="" style="width: 100%;height: 40rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img2.jpg" mode="" style="width: 100%;height: 40rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img3.jpg" mode="" style="width: 100%;height: 40rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img4.jpg" mode="" style="width: 100%;height: 40rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img5.jpg" mode="" style="width: 100%;height: 40rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img6.jpg" mode="" style="width: 100%;height: 15rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img7.jpg" mode="" style="width: 100%;height: 15rem;"></image>
-				<image src="../../static/dateils-img/libai-user-img8.jpg" mode="" style="width: 100%;height: 30rem;"></image>
+				<image v-for="item of dateils.dateils" :src="item" mode="" style="width: 100%;height: 22rem;"></image>
 			</view>
 			<!-- 点击选择款式就显示，不点击就隐藏 -->
 			<view v-show="show">
@@ -177,7 +169,6 @@
 		},
 		data() {
 			return {
-				imgs:["https://game.gtimg.cn/images/zb/x5/uploadImg/goods/201909/20190917135827_95564.big.jpg","https://game.gtimg.cn/images/zb/x5/uploadImg/goods/201909/20190917135830_51349.big.jpg","https://game.gtimg.cn/images/zb/x5/uploadImg/goods/201909/20190917135848_63799.big.jpg","https://game.gtimg.cn/images/zb/x5/uploadImg/goods/201909/20190917135851_45758.big.jpg","https://game.gtimg.cn/images/zb/x5/uploadImg/goods/201909/20190917135853_52254.big.jpg"],
 				arr:["商品","详情"],
 				active:0,
 				count:0,
@@ -185,11 +176,14 @@
 				// 未收藏false，收藏true
 				collection:false,
 				pl:true,
-				qd:true
+				qd:true,
+				_id:'',
+				dateils:{}
 			}
 		},
 		onLoad(option) {
 			console.log(option)
+			this._id = option.id;
 		},
 		methods: {
 			scount(n){
@@ -197,6 +191,12 @@
 			},
 			// 收藏
 			collections(){},
+			// 通过传过来的id查找商品
+			async fetch(){
+				const res = await this.$http.get(`dateils/${this._id}`);
+				this.dateils = res.data;
+				console.log(this.dateils)
+			}
 		},
 		watch:{
 			count(){
@@ -204,6 +204,9 @@
 					this.count = 0;
 				}
 			}
+		},
+		created() {
+			this.fetch();
 		}
 	}
 </script>

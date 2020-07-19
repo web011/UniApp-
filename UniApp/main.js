@@ -4,6 +4,12 @@ import App from './App'
 Vue.config.productionTip = false
 import 'static/scss/style.scss'
 
+// 写axios请求
+import axios from 'axios'
+
+Vue.prototype.$http = axios.create({
+	baseURL:'http://localhost:3000/web/'
+})
 
 
 // 引入字体图标
