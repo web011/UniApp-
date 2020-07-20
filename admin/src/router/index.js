@@ -14,6 +14,8 @@ import CateDateilsList from '../views/CateDateilsList'
 import AdminUser from '../views/AdminUser'
 import AdminUserList from '../views/AdminUserList'
 import Login from '../views/Login'
+import WebUser from '../views/WebUser'
+import WebUserList from '../views/WebUserList'
 
 
 Vue.use(VueRouter)
@@ -57,6 +59,11 @@ Vue.use(VueRouter)
       {path:'/children/AdminUser/:id',component:AdminUser,props:true},
       {path:'/children/AdminUser',component:AdminUser},
       {path:'/children/AdminUserList',component:AdminUserList},
+
+
+      {path:'/children/WebUser/:id',component:WebUser,props:true},
+      {path:'/children/WebUser',component:WebUser},
+      {path:'/children/WebUserList',component:WebUserList},
     ],
   },
 ]

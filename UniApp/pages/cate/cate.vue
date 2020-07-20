@@ -10,7 +10,7 @@
 		<!-- nav -->
 		<scroll-view class="scroll-view_H" scroll-x="true">
 			<!-- 内容 -->
-			<view id="demo1" class="scroll-view-item_H" v-for="(item,i) in fenlei" :key="i" :class="{'text-jg-color':fenleis==i}" @click="fenleis = i">{{item}}</view>
+			<view id="demo1" class="scroll-view-item_H" v-for="(item,i) of catedateils" :key="i" :class="{'text-jg-color':fenleis==i}" @click="cateclicks(i,item.skills)">{{item.name}}</view>
 		</scroll-view>
 		<!-- price-nav -->
 		<ul type="none" class="d-flex fs-md ai-center jc-center p-0">
@@ -21,7 +21,7 @@
 				<text v-else-if="active!==4">价格</text>
 			</li>
 		</ul>
-		<dateils></dateils>
+		<dateils :dateils="dateilslist"></dateils>
 	</view>
 </template>
 
@@ -38,14 +38,21 @@
 				old: {
 					scrollTop: 0
 				},
-				fenlei:["全部","手办模玩","数码3C","服饰","毛绒玩偶","生活用品","智能机器人","金银饰品","数据线","食品","图书"],
-				fenleis:0
+				fenleis:0,
+				catedateils:[{
+					skills:[]
+				}],
+				dateilslist:[]
 			}
 		},
 		onLoad() {
 	
 		},
 		methods: {
+			cateclicks(i,item){
+				this.fenleis = i;
+				this.dateilslist = item;
+			},
 			jiage(){
 				if(this.active!==4){
 					this.active = 4;
@@ -64,6 +71,14 @@
 					title:"纵向滚动 scrollTop 值已被修改为 0"
 				})
 			},
+			async fetchcate(){
+				const res = await this.$http.get('cate');
+				this.catedateils = res.data;
+				this.dateilslist = this.catedateils[0].skills;
+			}
+		},
+		created(){
+			this.fetchcate();
 		}
 	}
 </script>

@@ -46,6 +46,10 @@
 		// 订单
 		{
 			"path":"pages/order/order"
+		},
+		// 登陆
+		{
+			"path":"pages/login/login"
 		}
 	],
 	"globalStyle": {

@@ -68,6 +68,14 @@
             </div>
           </van-collapse-item>
         </van-collapse>
+        <van-collapse v-model="activeName" accordion>
+          <van-collapse-item title="用户" name="7">
+            <div class="d-flex flex-column jc-center ai-center">
+              <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==12}" @click="active = 12;$router.push('/children/WebUser')">添加用户</p>
+              <p class="cr text-center w-100 border-r" style="height:3rem;line-height: 3rem;" :class="{'active':active==13}" @click="active = 13;$router.push('/children/WebUserList')">用户列表</p>
+            </div>
+          </van-collapse-item>
+        </van-collapse>
       </div>
     </div>
     <div class="container-right">

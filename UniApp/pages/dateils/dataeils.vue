@@ -16,7 +16,7 @@
 		<view v-show="pl==true">
 			<!-- 商品轮播 -->
 			<swiper :indicator-dots="true" :autoplay="true" circular="true" :interval="3000" :duration="1000">
-				<swiper-item v-for="(item,i) of dateils.commodityswiper" :key="i">
+				<swiper-item v-for="(item,i) of dateils.commodityswiper || dateils.dateilsswiper" :key="i">
 					<view class="swiper-item w-100 h-100">
 						<image :src="item" mode=""></image>
 					</view>
@@ -66,7 +66,7 @@
 			</view>
 			<!-- 商品详情 -->
 			<view id="s1" class="mb-4">
-				<image v-for="item of dateils.dateils" :src="item" mode="" style="width: 100%;height: 22rem;"></image>
+				<image v-for="item of dateils.dateils || dateils.dateilsicon" :src="item" mode="" style="width: 100%;height: 21.5rem;"></image>
 			</view>
 			<!-- 点击选择款式就显示，不点击就隐藏 -->
 			<view v-show="show">
