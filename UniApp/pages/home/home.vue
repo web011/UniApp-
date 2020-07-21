@@ -50,20 +50,20 @@
 		</view>
 		<!-- 商品详情 -->
 		<view class="p-3 d-flex ai-center jc-between">
-			<view class="p-details text-center" style="position: relative;">
+			<router-link to="/pages/cate/cate?id=0&name=uname" tag="div" class="p-details text-center" @click="j(0)" style="position: relative;">
 				<image src="../../static/home-img/top-details1-1.png" mode="" style="width: 1.5rem;height: 0.7rem;position: absolute;p: -0.1rem;left: 1.9rem; z-index: 999;"></image>
 				<image src="../../static/home-img/top-details1.png" mode=""></image>
 				<view class="fs-xs">鲜货上架</view>
-			</view>
-			<view class="p-details text-center">
+			</router-link>
+			<view class="p-details text-center" @click="j(2)">
 				<image src="../../static/home-img/top-details2.png" mode=""></image>
 				<view class="fs-xs">服饰专区</view>
 			</view>
-			<view class="p-details text-center">
+			<view class="p-details text-center" @click="j(3)">
 				<image src="../../static/home-img/top-details3.png" mode=""></image>
 				<view class="fs-xs">毛绒玩偶</view>
 			</view>
-			<view class="p-details text-center">
+			<view class="p-details text-center" @click="j(4)">
 				<image src="../../static/home-img/top-details4.png" mode=""></image>
 				<view class="fs-xs">生活用品</view>
 			</view>
@@ -175,6 +175,12 @@
 				this.swipers = res.data;
 				const res1 = await this.$http.get('homedateils');
 				this.dateils = res1.data;
+			},
+			j(n){
+				console.log(n)
+				uni.navigateTo({
+					url:`../cate/cate`
+				})
 			}
 		},
 		created() {

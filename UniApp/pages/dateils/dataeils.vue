@@ -253,7 +253,7 @@
 					const res = await this.$http.delete('cart/'+_id+'/'+this.dateils._id);
 					this.userdateils = res.data;
 					this.dateils.count = this.count;
-					this.dateils.box = true;
+					this.dateils.box = false;
 					this.userdateils.cart.unshift(this.dateils);
 					console.log(this.userdateils)
 					const res1 = await this.$http.put('login/'+_id,this.userdateils);

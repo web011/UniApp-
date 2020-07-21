@@ -43,7 +43,7 @@
 			</view>
 			<view style="width: 5rem;text-align: center;border-right:1px solid #ddd">
 				<p class="fs-xs">共计</p>
-				<text class="fs-sm">{{i}}件</text>
+				<text class="fs-sm">{{cartcount}}件</text>
 			</view>
 			<view style="width: 5rem;text-align: center;">
 				<p class="fs-xs">合计</p>
@@ -82,13 +82,22 @@
 					}
 				}
 				return count*i
+			},
+			cartcount(){
+				var i = 0;
+				for(var s of this.userdateils.cart){
+					if(s.box){
+						i+=1;
+					}
+				}
+				return i;
 			}
 		},
 		data() {
 			return {
 				shows:"为你推荐",
 				box:true,
-				quanxuan:true,
+				quanxuan:false,
 				dateils:{},
 				userdateils:{
 					cart:[]
