@@ -16,6 +16,18 @@
             <el-form-item label="用户名">
                 <el-input v-model="model.username"></el-input>
             </el-form-item>
+            <el-form-item label="QQ">
+                <el-input v-model="model.userQQ"></el-input>
+            </el-form-item>
+            <el-form-item label="出生">
+                <el-input v-model="model.born"></el-input>
+            </el-form-item>
+            <el-form-item label="住址">
+                <el-input v-model="model.address"></el-input>
+            </el-form-item>
+            <el-form-item label="性别">
+                <el-input v-model="model.sex"></el-input>
+            </el-form-item>
             <el-form-item label="用户密码">
                 <el-input  v-model="model.password"></el-input>
             </el-form-item>
@@ -52,6 +64,8 @@ export default {
             if(this.id){
                 res = await this.$http.put(`rest/WebUser/${this.id}`,this.model);
                 this.$router.push('/children/WebUserlist')
+                console.log(this.model);
+                console.log(res.data)
                 this.$message({
                     type:'success',
                     message:'修改成功'

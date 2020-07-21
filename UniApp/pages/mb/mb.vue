@@ -21,7 +21,19 @@
 		},
 		methods: {
 		
-		}
+		},
+		// 监听
+		watch:{
+			
+		},
+		// 页面一显示就执行一段代码
+		activated() {
+			
+		},
+		// 页面退出的会执行
+		deactivated: function () {
+		
+		},
 	}
 </script>
 

@@ -23,6 +23,11 @@ import './assets/iconfont/iconfont.css'
 // 引入scss文件
 import './assets/scss/style.scss'
 
+// 引入mint-ui
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
+
 Vue.mixin({
   computed:{
     uploadUrl(){

@@ -25,7 +25,7 @@
 			<!-- 商品名称和价格 -->
 			<view class="mb-2 bg-white d-flex flex-column">
 				<p class="text-ellipse fs-xss ml-3 mt-3 w-100">{{dateils.title}}</p>
-				<text class="text-jg-color fs-xss ml-3 mt-2 pb-2 font-b">{{dateils.price}}</text>
+				<text class="text-jg-color fs-xss ml-3 mt-2 pb-2 font-b">￥{{dateils.price}}</text>
 			</view>
 			<!-- 商品款式 -->
 			<!-- 点击选择款式就显示加入购物车或者立即购买的样式 -->
@@ -74,17 +74,17 @@
 				<view class="showks bg-white p-3">
 					<!-- 商品图片和标题和价格 -->
 					<view class="d-flex">
-						<image src="../../static/home-img/card-img-text1.png" mode=""></image>
+						<image :src="dateils.imgurl" mode=""></image>
 						<view class="flex-1">
-							<p class="text-jg-color fs-md ml-1 font-b">￥258.00</p>
-							<text class="text-ellipse fs-md ml-2 w-100">千年之狐李白Q版手办</text>
+							<p class="text-jg-color fs-md ml-1 font-b">￥{{dateils.price}}</p>
+							<text class="text-ellipse fs-md ml-2 w-100">{{dateils.title}}</text>
 						</view>
 						<text @click="show = false">x</text>
 					</view>
 					<!-- 款式 -->
 					<view>
 						<p class="text-font-hui fs-sm mt-3">款式</p>
-						<text class="fs-xs buttons mt-2">现货</text>
+						<text class="fs-xs buttons mt-2" :class="activeks == 1 ? '' : 'ks1'" @click="activeks == 1 ? activeks = 0 : activeks = 1">现货</text>
 					</view>
 					<!-- 数量 -->
 					<view class="">
@@ -100,7 +100,7 @@
 					</view>
 					<view class="w-100 carts">
 						<!-- 点击立刻购买和加入购物车显示这个 -->
-						<text class="text-white bg-jg-color fs-lg" style="width: 100%;" v-show="qd">确定</text>
+						<text class="text-white bg-jg-color fs-lg" style="width: 100%;" v-show="qd" @click="carts">确定</text>
 					</view>
 				</view>
 			</view>
@@ -115,7 +115,7 @@
 					<text class="fs-xs">客服</text>
 				</view>
 				<!-- 收藏用三目运算符来判断是否收藏，当然如果发送请求就需要写一个函数名了 -->
-				<view  @click="collection == false ? collection = true : collection = false" style="width: 15%; height: 100%;" class="d-flex flex-column ai-center jc-center">
+				<view  v-on:click="collections" style="width: 15%; height: 100%;" class="d-flex flex-column ai-center jc-center">
 					<!-- 未收藏 -->
 					<i v-if="collection" class="iconfont icon-shoucang1 text-jg-color"></i>
 					<!-- 已收藏 -->
@@ -158,6 +158,7 @@
 </template>
 
 <script>
+	import { Toast } from 'mint-ui';
 	export default {
 		// 接收父组件的值
 		props:{
@@ -171,42 +172,106 @@
 			return {
 				arr:["商品","详情"],
 				active:0,
-				count:0,
+				activeks:1,
+				count:1,
 				show:false,
 				// 未收藏false，收藏true
 				collection:false,
 				pl:true,
 				qd:true,
 				_id:'',
-				dateils:{}
+				dateils:{
+					data:''
+				},
+				// 获取用户信息
+				userdateils:{
+					collections:[],
+					cart:[]
+				}
 			}
 		},
 		onLoad(option) {
-			console.log(option)
 			this._id = option.id;
 		},
 		methods: {
 			scount(n){
 				this.count += n;
 			},
-			// 收藏
-			collections(){},
 			// 通过传过来的id查找商品
 			async fetch(){
 				const res = await this.$http.get(`dateils/${this._id}`);
 				this.dateils = res.data;
-				console.log(this.dateils)
+			},
+			// 获取当前登陆用户的信息
+			async getuser(){
+				const _id = localStorage._id;
+				const res = await this.$http.get('login/'+_id);
+				this.userdateils = res.data;
+				for(var item of this.userdateils.collections){
+					if(item._id == this.dateils._id){
+						this.collection = true;
+						break;
+					}
+				}
+			},
+			// 收藏
+			async collections(){
+				const _id = localStorage._id;
+				// 收藏成功
+				if(this.collection === false){
+					this.collection = true;
+					var d = new Date();
+					var tiem = d.toLocaleDateString();
+					this.dateils.data = tiem+=" "+d.toLocaleTimeString();
+					if(this.userdateils.collections.length === 0){
+						this.userdateils.collections.unshift(this.dateils);
+						const res = await this.$http.put('login/'+_id,this.userdateils);
+					}else{
+						for(var s of this.userdateils.collections){
+							if(s._id == this.dateils._id){
+								break;
+							}else{
+								this.userdateils.collections.unshift(this.dateils);
+								const res = await this.$http.put('login/'+_id,this.userdateils);
+								break;
+							}
+						}
+					}
+				}else{
+					// 取消收藏
+					this.collection = false;
+					const res = await this.$http.delete('login/'+_id+'/'+this.dateils._id);
+					console.log(res.data)
+				}
+			},
+			// 添加购物车
+			async carts(){
+				if(this.activeks == 1){
+					Toast('请先选择款式');
+				}else{
+					const _id = localStorage._id;
+					const res = await this.$http.delete('cart/'+_id+'/'+this.dateils._id);
+					this.userdateils = res.data;
+					this.dateils.count = this.count;
+					this.dateils.box = true;
+					this.userdateils.cart.unshift(this.dateils);
+					console.log(this.userdateils)
+					const res1 = await this.$http.put('login/'+_id,this.userdateils);
+					console.log(res1.data)
+					this.$router.push('/pages/cart/cart')
+				}
 			}
 		},
 		watch:{
 			count(){
-				if(this.count < 0){
-					this.count = 0;
+				if(this.count < 1){
+					this.count = 1;
 				}
 			}
 		},
 		created() {
 			this.fetch();
+			this.getuser();
 		}
 	}
 </script>
@@ -252,6 +317,10 @@
 		.ks{
 			border-top:1px solid #999;
 			border-bottom: 1px solid #999;
+		}
+		.ks1{
+			background-color: #ffaac1;
+			color: #fff;
 		}
 		// 用户评分
 		.userpj{

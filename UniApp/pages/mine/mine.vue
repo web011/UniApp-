@@ -1,8 +1,8 @@
 <template>
 	<view class="mine-container">
 		<router-link to="/pages/personal/personal" tag="div" class="users d-flex ai-center jc-left bg-white p-2 pr-3 pl-3">
-			<image class="border-r" src="../../static/mineuser/mes.jpg" mode=""></image>
-			<h4 class="fs-lg ml-3 text-ellipse flex-1">用户名称</h4>
+			<image class="border-r" :src="userdateils.userimg" mode=""></image>
+			<h4 class="fs-lg ml-3 text-ellipse flex-1">{{userdateils.username}}</h4>
 			<i class="iconfont icon-iconfontjiantou3"></i>
 		</router-link>
 		<view class="d-flex p-2 pr-3 pl-3 bg-white">
@@ -49,7 +49,7 @@
 		<view class="bg-white">
 			<router-link to="/pages/cart/cart" tag="div" class="d-flex jc-left ai-center p-2 pl-3 pr-3" style="border-bottom: 1px solid #efefef;">
 				<view class="sprite sprite-gwc mr-2"></view>
-				<text class="fs-sm flex-1">我的购物车<text class="text-font-hui">（1）</text></text>
+				<text class="fs-sm flex-1">我的购物车<text class="text-font-hui">（{{i}}）</text></text>
 				<i class="iconfont icon-iconfontjiantou3"></i>
 			</router-link>
 			<view class="d-flex jc-left ai-center p-2 pl-3 pr-3" style="border-bottom: 1px solid #efefef;">
@@ -59,7 +59,7 @@
 			</view>
 			<router-link to="/pages/collection/collection" tag="div" class="d-flex jc-left ai-center p-2 pl-3 pr-3" style="border-bottom: 1px solid #efefef;">
 				<view class="sprite sprite-sc mr-2"></view>
-				<text class="fs-sm flex-1">我的收藏<text class="text-font-hui">（1）</text></text>
+				<text class="fs-sm flex-1">我的收藏<text class="text-font-hui">（{{n}}）</text></text>
 				<i class="iconfont icon-iconfontjiantou3"></i>
 			</router-link>
 			<view class="d-flex jc-left ai-center p-2 pl-3 pr-3" style="border-bottom: 1px solid #efefef;">
@@ -102,15 +102,41 @@
 		},
 		data() {
 			return {
-
+				userdateils:{},
+				// 获取购物车数量
+				i:0,
+				// 获取收藏的数量
+				n:0
 			}
 		},
 		onLoad() {
 	
 		},
 		methods: {
-		
-		}
+			async gatuser(){
+				// 获取用户信息
+				const _id = localStorage._id;
+				const res = await this.$http.get('/login/'+_id);
+				this.userdateils = res.data;
+				this.i = this.userdateils.cart.length;
+				this.n = this.userdateils.collections.length;
+			}
+		},
+		created(){
+			this.gatuser();
+			if(!sessionStorage.token){
+				this.$router.push('/pages/login/login')
+			}
+		},
+		// 页面一显示就执行一段代码
+		activated() {
+		  if(!sessionStorage.token){
+			  this.userdateils = {};
+			  this.$router.push('/pages/login/login')
+		  }else{
+			  this.gatuser();
+		  }
+		},
 	}
 </script>
 

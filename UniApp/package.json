@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "element-ui": "^2.13.2",
+    "mint-ui": "^2.2.13",
     "vant": "^2.9.2"
   }
 }

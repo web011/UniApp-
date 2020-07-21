@@ -12,6 +12,7 @@ const schema = new mongoose.Schema({
         showimg:{type:String},
         title:{type:String},
         price:{type:String},
+        count:{type:Number}
     }]
 })
 

@@ -6,7 +6,7 @@
 				<image :src="item.imgurl || item.showimg" class="border-r" mode=""></image>
 				<view class="ml-1">
 					<p class="text-ellipse fs-sm ml-2" style="width: 7.5rem;">{{item.title}}</p>
-					<p class="text-jg-color fs-xl ml-1 font-b">{{item.price}}</p>
+					<p class="text-jg-color fs-xl ml-1 font-b">￥{{item.price}}</p>
 				</view>
 			</view>
 		</view>
@@ -33,7 +33,6 @@
 				uni.navigateTo({
 					url:`../dateils/dataeils?id=${n}&name=uname`
 				})
-				console.log(this.dateils)
 			}
 		},
 		created(){

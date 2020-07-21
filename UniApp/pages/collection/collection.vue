@@ -7,26 +7,31 @@
 			<text class="fs-lg">我的收藏</text>
 		</view>
 		<!-- 循环这个标签生成多个商品 -->
-		<view class="cart-text w-100 bg-white d-flex jc-left ai-center mb-2">
+		<view class="cart-text w-100 bg-white d-flex jc-left ai-center mb-2" v-for="(item,i) of userdateils.collections" :key="i">
 			<view class="cart-text-center d-flex jc-center ai-center">
-				<image src="../../static/cart.jpg" mode="" class="ml-2 border-r"></image>
+				<image :src="item.imgurl" mode="" class="ml-2 border-r"></image>
 				<view class="ml-2">
-					<p class="fs-sm text-e" style="width: 8rem;">长城守卫军手办套装（5只）</p>
-					<p class="text-jg-color fs-lg font-b">￥378.00 </p>
+					<p class="fs-sm text-e" style="width: 8rem;">{{item.title}}</p>
+					<p class="text-jg-color fs-lg font-b">{{item.price}}</p>
 					<text class="text-font-hui fs-sm">有货</text>
-					<p class="fs-sm">收藏时间：2020-07-14-10:27</p>
+					<p class="fs-xs">收藏时间：{{item.data}}</p>
 				</view>
 				<view class="ml-2 d-flex flex-column ai-center">
-					<view @click="ligegoumai"><p class="text-jg-color fs-md gmai">立刻购买</p></view>
-					<text class="text-font-hui fs-md mt-2">删除</text>
+					<view @click="ligegoumai(item._id)"><p class="text-jg-color fs-md gmai">立刻购买</p></view>
+					<text @click="deletes(item._id)" class="text-font-hui fs-md mt-2">删除</text>
 				</view>
 			</view>
 		</view>
-		<dateils :shows="shows"></dateils>
+		<view class="w-100 d-flex jc-center ai-center fs-xl" style="height: 5rem;" v-show="userdateils.collections==0">
+			暂时没有收藏商品
+		</view>
+		<dateils :shows="shows" :dateils="dateils"></dateils>
 	</view>
 </template>
 
 <script>
+	import { MessageBox } from 'mint-ui';
+	import { Toast } from 'mint-ui';
 	import dateils from '../../component/dateils-list/dateils-list.vue';
 	export default {
 		// 接收父组件的值
@@ -40,22 +45,46 @@
 		data() {
 			return {
 				shows:"猜你喜欢",
+				userdateils:{},
+				dateils:{}
 			}
 		},
 		onLoad() {
 	
 		},
 		methods: {
-			ligegoumai(){
-				console.log(1)
+			ligegoumai(id){
 				uni.navigateTo({
-					url:`../dateils/dataeils?id=商品id`
+					url:`../dateils/dataeils?id=${id}&name=uname`
 				})
+			},
+			async gatuser(){
+				// 获取用户信息
+				const _id = localStorage._id;
+				const res = await this.$http.get('/login/'+_id);
+				this.userdateils = res.data;
+				// 获取猜你喜欢商品
+				const res1 = await this.$http.get('homedateils');
+				this.dateils = res1.data;
+			},
+			async deletes(id){
+				MessageBox.confirm('是否要删除该收藏吗？').then(async action => {
+				  const res = await this.$http.delete('login/'+this.userdateils._id+'/'+id);
+				  this.gatuser();
+				  Toast('删除成功');
+				});
 			}
 		},
 		watch:{
 			
-		}
+		},
+		created() {
+			this.gatuser();
+		},
+		// 页面一显示就执行一段代码
+		activated() {
+			this.gatuser();
+		},
 	}
 </script>
 

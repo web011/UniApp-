@@ -9,36 +9,36 @@
 		<view class="bg-white" style="border-top: 1px solid #efefef;">
 			<view class="d-flex jc-between ai-center p-2 pr-3 pl-3">
 				<text class="fs-md">头像</text>
-				<image src="../../static/mineuser/mes.jpg" mode="" style="width: 3rem;height: 3rem;" class="border-r"></image>
+				<image :src="userdateils.userimg" mode="" style="width: 3rem;height: 3rem;" class="border-r"></image>
 			</view>
 		</view>
 		<view class="bg-white" style="border-top: 1px solid #efefef;">
 			<view class="d-flex jc-between ai-center p-3 pr-3 pl-3">
 				<text class="fs-md">昵称</text>
-				<text class="text-font-hui fs-lg">用户名称</text>
+				<text class="text-font-hui fs-lg">{{userdateils.username}}</text>
 			</view>
 		</view>
 		<view class="bg-white" style="border-top: 1px solid #efefef;">
 			<view class="d-flex jc-between ai-center p-3 pr-3 pl-3">
 				<text class="fs-md">性别</text>
-				<text class="text-font-hui fs-lg">男</text>
+				<text class="text-font-hui fs-lg">{{userdateils.sex}}</text>
 			</view>
 		</view>
 		<view class="bg-white" style="border-top: 1px solid #efefef;">
 			<view class="d-flex jc-between ai-center p-3 pr-3 pl-3">
 				<text class="fs-md">生日</text>
-				<text class="text-font-hui fs-lg">0000-00-0</text>
+				<text class="text-font-hui fs-lg">{{userdateils.born}}</text>
 			</view>
 		</view>
 		<view class="bg-white" style="border-top: 1px solid #efefef;">
 			<view class="d-flex jc-between ai-center p-3 pr-3 pl-3">
 				<text class="fs-md">所在地</text>
-				<text class="text-font-hui fs-lg">广东 湛江 <i class="iconfont icon-iconfontjiantou3"></i></text>
+				<text class="text-font-hui fs-lg">{{userdateils.address}}<i class="iconfont icon-iconfontjiantou3"></i></text>
 			</view>
 		</view>
 		<view class="bg-white" style="border-top: 1px solid #efefef;border-bottom: 1px solid #efefef;">
 			<view class="text-right p-2 pr-3 pl-3">
-				<text class="fs-md text-jg-color">退出当前用户</text>
+				<text class="fs-md text-jg-color" @click="retreat">退出当前用户</text>
 			</view>
 		</view>
 		<view class="baocun">
@@ -52,6 +52,8 @@
 </template>
 
 <script>
+	import { MessageBox } from 'mint-ui';
+	import { Toast } from 'mint-ui';
 	export default {
 		// 接收父组件的值
 		props:{
@@ -63,14 +65,34 @@
 		},
 		data() {
 			return {
-
+				userdateils:{}
 			}
 		},
 		onLoad() {
 	
 		},
 		methods: {
-		
+			async gatuser(){
+				// 获取用户信息
+				const _id = localStorage._id;
+				const res = await this.$http.get('/login/'+_id);
+				this.userdateils = res.data;
+			},
+			// 用户退出登陆
+			retreat(){
+				MessageBox.confirm('是否要退出：'+this.userdateils.username).then(action => {
+				  sessionStorage.token = '';
+				  localStorage._id = '';
+				  this.$router.push('/');
+				  Toast('退出成功');
+				});
+			}
+		},
+		created(){
+			this.gatuser();
+			if(!sessionStorage.token){
+				this.$router.push('/pages/login/login')
+			}
 		}
 	}
 </script>

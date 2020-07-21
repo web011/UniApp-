@@ -175,12 +175,10 @@
 				this.swipers = res.data;
 				const res1 = await this.$http.get('homedateils');
 				this.dateils = res1.data;
-				console.log(this.dateils)
 			}
 		},
 		created() {
 			this.fetchswiper();
-			console.log(this.swipers)
 		}
 	}
 </script>

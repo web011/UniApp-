@@ -49,7 +49,18 @@
 		},
 		methods: {
 		
-		}
+		},
+		created() {
+			if(!sessionStorage.token){
+				this.$router.push('/pages/login/login')
+			}
+		},
+		// 页面一显示就执行一段代码
+		activated() {
+			if(!sessionStorage.token){
+				this.$router.push('/pages/login/login')
+			}
+		},
 	}
 </script>
 

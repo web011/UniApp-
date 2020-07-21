@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import App from './App'
 
+// 引入mint-ui
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+Vue.use(MintUI)
+
+
+
 Vue.config.productionTip = false
 import 'static/scss/style.scss'
 
-// 写axios请求
-import axios from 'axios'
 
-Vue.prototype.$http = axios.create({
-	baseURL:'http://localhost:3000/web/'
-})
+import http from './http'
+Vue.prototype.$http = http;
+
 
 
 // 引入字体图标

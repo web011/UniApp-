@@ -3,6 +3,7 @@
         <h1 class="mb-5 mt-5 ml-4">用户列表</h1>
         <el-table :data="items">
             <el-table-column prop="username" label="用户名"></el-table-column>
+            <el-table-column prop="userQQ" label="用户账号"></el-table-column>
             <!-- <el-table-column prop="password" label="用户密码"></el-table-column> -->
             <el-table-column prop="url" label="头像">
                 <template slot-scope="scope">
